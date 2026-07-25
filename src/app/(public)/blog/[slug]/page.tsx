@@ -1,8 +1,6 @@
 
-// import { supabase } from "@/lib/supabase";
 import type { Metadata } from "next";
 import ArticleClient from "./ArticleClient";
-// import { createClient } from "@/lib/supabase/client";
 import { createClient } from "@/lib/supabase/server";
 
 // const supabase = createClient();
@@ -15,6 +13,7 @@ export async function generateMetadata(
   { params }: Props
 ): Promise<Metadata> {
   const { slug } = await params;
+  
 
   const supabase = await createClient();
 
@@ -23,6 +22,16 @@ export async function generateMetadata(
     .select("*")
     .eq("slug", slug)
     .single();
+
+  console.log(
+  "COLUMNAS DISPONIBLES:",
+  Object.keys(data || {})
+);
+
+console.log(
+  "IMAGEN:",
+  JSON.stringify(data?.newsImage)
+);
 
   if (!data) {
     return {
@@ -42,6 +51,7 @@ export async function generateMetadata(
           url: data.newsImage?.[0],
           width: 1200,
           height: 630,
+          alt: data.title,
         },
       ],
       type: "article",

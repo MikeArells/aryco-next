@@ -41,3 +41,41 @@
 
     cursor:pointer;
 }
+
+/* Tablets */
+@media (max-width: 992px) {
+
+    .searchBar{
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+/* Celulares */
+@media (max-width: 768px){
+
+    .filterSection{
+        padding: 12px;
+    }
+
+    .searchBar{
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .searchInput,
+    .searchSelect{
+        height: 44px;
+        font-size: 14px;
+    }
+
+}
+
+/* @media (max-width: 768px) {
+    .filterSection {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: white;
+    }
+} */

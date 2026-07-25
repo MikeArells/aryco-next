@@ -1,5 +1,4 @@
 import Script from 'next/script';
-// import Image from 'next/image';
 import styles from './property.module.css';
 import { getProperty } from '@/lib/properties';
 import TiktokEmbed from "@/components/TiktokEmbed/TiktokEmbed";

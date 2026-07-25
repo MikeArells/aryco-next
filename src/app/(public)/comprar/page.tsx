@@ -1,7 +1,6 @@
 "use client";
 
 import Script from "next/script";
-// import { supabase } from "@/lib/supabase";
 import type { Propiedad } from "@/types/propiedad";
 import styles from "./comprar.module.css";
 import { useEffect, useState, useMemo} from "react";
