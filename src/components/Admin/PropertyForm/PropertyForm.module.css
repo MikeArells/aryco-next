@@ -1,0 +1,158 @@
+.container {
+  max-width: 1200px;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: #6c757d;
+  margin-bottom: 2rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputGroupFull {
+  display: flex;
+  flex-direction: column;
+  grid-column: 1 / -1;
+}
+
+.label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.input,
+.select,
+.textarea {
+  width: 100%;
+
+  padding: 12px 14px;
+
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+
+  font-size: 1rem;
+
+  transition: border-color 0.2s ease;
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+  outline: none;
+  border-color: #0d6efd;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 180px;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.button {
+  background: #0d6efd;
+  color: white;
+
+  border: none;
+  border-radius: 8px;
+
+  padding: 12px 24px;
+
+  cursor: pointer;
+
+  font-size: 1rem;
+  font-weight: 600;
+
+  transition: background 0.2s;
+}
+
+.button:hover {
+  background: #0b5ed7;
+}
+
+
+/* FOR SERVICES BOX */
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 10px 12px;
+
+  border: 1px solid #ddd;
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.checkbox:hover {
+  background: #f5f5f5;
+}
+
+.checkbox input {
+  cursor: pointer;
+}
+
+/* PARA BOTON */
+.actions {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.submitButton {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  background: #0d6efd;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.submitButton:hover {
+  background: #0b5ed7;
+}
+
+
+@media (max-width: 768px) {
+  .row {
+    grid-template-columns: 1fr;
+  }
+}

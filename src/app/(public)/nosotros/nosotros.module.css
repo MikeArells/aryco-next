@@ -1,0 +1,158 @@
+.hero {
+  position: relative;
+  height: 500px;
+  overflow: hidden;
+}
+
+.heroImage {
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.45);
+  z-index: 1;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  gap: 20px;
+}
+
+.heroContent h1 {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.heroArrow {
+  font-size: 2rem;
+  color: white;
+  text-decoration: none;
+}
+
+.about {
+  padding: 80px 0;
+  background: white;
+}
+
+.aboutHeader {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.aboutHeader h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.aboutHeader p {
+  max-width: 900px;
+  margin: auto;
+  line-height: 1.8;
+}
+
+.aboutGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+}
+
+.aboutBlock {
+  padding: 30px;
+}
+
+.aboutBlock h3 {
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+}
+
+.aboutBlock p {
+  line-height: 1.8;
+}
+
+.values {
+  background: #1f1f1f;
+  color: white;
+  padding: 80px 0;
+}
+
+.valuesTitle {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.valuesGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  text-align: center;
+}
+
+.valuesGrid article {
+  padding: 20px;
+}
+
+.valuesGrid h3 {
+  margin-bottom: 15px;
+}
+
+/* FOOTER */
+.footer {
+  background: #2f6b1f;
+  padding: 25px 40px;
+  color: white;
+}
+
+.footerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footerCenter {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.socialIcons {
+  display: flex;
+  gap: 20px;
+}
+
+.socialIcons a {
+  color: white;
+  font-size: 20px;
+  transition: 0.2s ease;
+}
+
+.socialIcons a:hover {
+  opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+  .heroContent h1 {
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  .aboutGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .valuesGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .footerContent {
+    flex-direction: column;
+    gap: 15px;
+  }
+}
