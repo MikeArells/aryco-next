@@ -5,6 +5,24 @@ import TiktokEmbed from "@/components/TiktokEmbed/TiktokEmbed";
 import PropertyGallery from "@/components/PropertyGallery/PropertyGallery";
 import { FaBed, FaBath, FaCar } from "react-icons/fa";
 
+import type { Metadata } from "next";
+// import { getProperty } from "@/lib/properties";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string; slug: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+  const property = await getProperty(id);
+
+  return {
+    title: `${property.titulo} | Aryco Bienes Raíces`,
+    description: property.descripcion?.slice(0, 160),
+  };
+}
+
+
 export default async function PropertyPage({
   params,
 }: {

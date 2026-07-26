@@ -14,6 +14,7 @@ export default function Home() {
           priority
           className={styles.heroImage}
         />
+        
       {/* HERO */}
       <div className="container text-center py-5">
         <h1>Compra, vende o renta</h1>

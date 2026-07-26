@@ -26,40 +26,40 @@ export default function Header() {
 
             <div className={`${styles.navWrapper} ${menuOpen ? styles.open : ""}`}>
 
-  <ul className="nav col-6 col-md-auto mb-2 justify-content-center mb-md-0">
-    <li><Link href="/comprar" className="nav-link px-5 text-white">Comprar</Link></li>
-    <li><Link href="/rentar" className="nav-link px-5 text-white">Rentar</Link></li>
-    <li><Link href="/vender" className="nav-link px-5 text-white">Vender</Link></li>
-  </ul>
+            <ul className="nav col-6 col-md-auto mb-2 justify-content-center mb-md-0">
+              <li><Link href="/comprar" className="nav-link px-5 text-white">Comprar</Link></li>
+              <li><Link href="/rentar" className="nav-link px-5 text-white">Rentar</Link></li>
+              <li><Link href="/vender" className="nav-link px-5 text-white">Vender</Link></li>
+            </ul>
 
-  <div className="logo">
-    <Link href="/">
-      <Image
-        src="/Arellano-cia.jpg"
-        alt="Logo"
-        width={180}
-        height={60}
-        className="logo h-auto"
-      />
-    </Link>
-  </div>
+            <div className={styles.logoContainer}>
+              <Link href="/">
+                <Image
+                  src="/Arellano-cia.jpg"
+                  alt="Logo"
+                  width={180}
+                  height={100}
+                  className={styles.logo}
+                />
+              </Link>
+            </div>
 
-  <ul className="nav col-6 col-md-auto mb-2 justify-content-center mb-md-0">
-    <li><Link href="/blog" className="nav-link px-5 text-white">Blog</Link></li>
-    <li><Link href="/nosotros" className="nav-link px-5 text-white">Nosotros</Link></li>
-  </ul>
+            <ul className="nav col-6 col-md-auto mb-2 justify-content-center mb-md-0">
+              <li><Link href="/blog" className="nav-link px-5 text-white">Blog</Link></li>
+              <li><Link href="/nosotros" className="nav-link px-5 text-white">Nosotros</Link></li>
+            </ul>
 
-  <div className="col-md-3 text-end">
-    <button className="btn btn-outline-primary me-4" disabled>
-      Cotizar seguro
-    </button>
+            <div className="col-md-3 text-end">
+              <button className="btn btn-outline-primary me-4" disabled>
+                Cotizar seguro
+              </button>
 
-    <Link href="/login" className="btn btn-primary">
-      Iniciar sesión
-    </Link>
-  </div>
+              <Link href="/login" className="btn btn-primary">
+                Iniciar sesión
+              </Link>
+            </div>
 
-</div>
+          </div>
 
         
           </header>

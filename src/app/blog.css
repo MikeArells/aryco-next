@@ -10,48 +10,47 @@ body {
     background-color: #2d6326;
   }
 
-  .nav-wrapper{
+  /* .nav-wrapper{
     position: sticky;
-  }
+  } */
   
-  .logo {
-    height: 50px; 
+  /* .logo {
+    height: 120px; 
     border-radius: 5px;
     display: flex;
     justify-content: center;
-  }
+  } */
 
   
 
   /**************** HAMBURGER ******************/
 
-.hamburger {
-  display: flex;
-  flex-direction: column; /* direccion de la colocacion de las rayas del hamburger*/
-  gap: 5px; /* separacion de cada raya del hamburger*/
-  cursor: pointer;  /*cambia de flecha a dedo en hover sobre las rayas*/
-  /* align-items: center; */
-  margin-right: 300px;
+/* .hamburger { */
+  /* display: flex; */
+  /*flex-direction: column;*/ /* direccion de la colocacion de las rayas del hamburger*/
+  /*gap: 5px;*/ /* separacion de cada raya del hamburger*/
+  /*cursor: pointer;*/  /*cambia de flecha a dedo en hover sobre las rayas*/
+  /* margin-right: 300px; */
   
-}
+/* } */
 
 /* header > .logo {
     margin: 0;
   } */
 
-.hamburger span {
-  width: 25px;  /*largo de cada raya*/
-  height: 3px;
+/* .hamburger span { */
+  /*width: 25px; */ /*largo de cada raya*/
+  /* height: 3px;
   background: white;
-}
+} */
 
 /* WRAPPER */
-.nav-wrapper {
+/* .nav-wrapper {
   display: flex;
   align-items: center;
   width: 100%;
-  /* justify-content: space-between; */
-}
+
+} */
 
 /* MÓVIL */
 @media (max-width: 1200px) {
@@ -65,19 +64,19 @@ body {
     flex-direction: column;
     display: none;
     padding: 10px 0;
-    /* z-index: 999; */
   }
 
   .nav-wrapper.active {
     display: flex;
   }
 
-
 }
 
-
-
-/**************** NOTICIAS Y TENDENCIAS ******************/
+/*==================== 
+======================
+NOTICIAS Y TENDENCIAS
+======================
+=====================*/
 
 .NewsTitle{
   margin-top: 30px;
@@ -390,24 +389,6 @@ body {
 .ctaButton:hover {
   background: #f1f1f1;
 }
-
-
-
-/*----------------------- Share Button -----------------------*/
-/* .shareBtn {
-  display: inline-block;
-  padding: 10px 16px;
-  background-color: #1877f2;
-  color: white;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: 500;
-  transition: 0.3s;
-}
-
-.shareBtn:hover {
-  background-color: #145dc1;
-}  */
 
 /* ================= MOBILE ================= */
 @media (max-width: 768px) {
