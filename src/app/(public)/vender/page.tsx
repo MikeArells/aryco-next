@@ -9,4 +9,3 @@ export const metadata: Metadata = {
 export default function VenderPage() {
   return <VenderClient />;
 }
-

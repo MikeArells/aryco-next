@@ -1,0 +1,59 @@
+.articleMain {
+  position: relative;
+}
+
+.shareBtn {
+  position: absolute;
+  top: -30px;
+  right: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 22px;
+  height: 22px;
+
+  text-decoration: none;
+  /* font-family: Arial, sans-serif;
+  font-weight: bold; */
+  border: none;
+  background: transparent;
+  /* cursor: pointer; */
+}
+
+/* .shareBtnInsta {
+  position: absolute;
+  top: -30px;
+  right: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 22px;
+  height: 22px;
+
+  text-decoration: none;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+} */
+
+.shareBtnWhatsapp {
+  position: absolute;
+  top: -30px;
+  right: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 22px;
+  height: 22px;
+
+  text-decoration: none;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}

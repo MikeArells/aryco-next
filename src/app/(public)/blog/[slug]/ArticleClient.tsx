@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Script from "next/script";
-// import { supabase } from "@/lib/supabase";
+import Styles from "./article.module.css";
 import { createClient } from "@/lib/supabase/client";
 
 type Article = {
@@ -67,6 +67,25 @@ export default function ArticleClient({ slug }: { slug: string }) {
             `https://arycobr.com/blog/${article.slug}`
             );
 
+//   const shareInstagram = async () => {
+//   const url = `https://arycobr.com/blog/${article.slug}`;
+
+//   if (navigator.share) {
+//     try {
+//       await navigator.share({
+//         title: article.title,
+//         text: article.title,
+//         url: url,
+//       });
+//     } catch (error) {
+//       console.log("Compartir cancelado");
+//     }
+//   } else {
+//     await navigator.clipboard.writeText(url);
+//     alert("Enlace copiado. Ahora puedes compartirlo en Instagram.");
+//   }
+// };
+
   return (
     <>
       {/* Google Tag Manager */}
@@ -104,21 +123,39 @@ export default function ArticleClient({ slug }: { slug: string }) {
             </div>
           </nav>
         </div>
+
         <div className="ArticuloRow3">
           <div className="articleContainer">
-
             
 
-            <article className="articleMain">
-              <span className="articleCategory">{article.category}</span>
+            <article className={Styles.articleMain}>
+              <span className={Styles.articleCategory}>{article.category}</span>
+
+              {/* <button
+                onClick={shareInstagram}
+                className={Styles.shareBtnInsta}
+                aria-label="Compartir en Instagram"
+              >
+                <i className="bi bi-instagram"></i>
+              </button> */}
 
               <a
                 href={`https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="shareBtn"
+                className={Styles.shareBtn}
               >
                 <i className="bi bi-facebook"></i>
+              </a>
+
+              <a
+                href={`https://wa.me/?text=${shareUrl}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={Styles.shareBtnWhatsapp}
+                aria-label="Compartir en WhatsApp"
+              >
+                <i className="bi bi-whatsapp"></i>
               </a>
 
               <h1 className="articleTitle">{article.title}</h1>
