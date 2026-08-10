@@ -6,13 +6,14 @@ import Image from "next/image";
 import Script from "next/script";
 import Styles from "./article.module.css";
 import { createClient } from "@/lib/supabase/client";
+import Footer from "@/components/Footer/Footer";
 
 type Article = {
   id: number;
   title: string;
   category: string;
   author: string;
-  date: string;
+  created_at: string;
   content: string;
   newsImage: string[];
   slug: string;
@@ -21,51 +22,68 @@ type Article = {
 export default function ArticleClient({ slug }: { slug: string }) {
   // const supabase = createClient();
 
-  const [article, setArticle] = useState<Article | null>(null);
-  const [popular, setPopular] = useState<Article[]>([]);
+const [article, setArticle] = useState<Article | null>(null);
+const [popular, setPopular] = useState<Article[]>([]);
 
-  useEffect(() => {
-    async function fetchData() {
-      const supabase = createClient();
-      const { data, error } = await supabase
-        .from("news")
-        .select("*")
-        .eq("slug", slug)
-        .maybeSingle();
+useEffect(() => {
+  async function fetchData() {
+    const supabase = createClient();
+    const { data, error } = await supabase
+      .from("news")
+      .select("*")
+      .eq("slug", slug)
+      .maybeSingle();
 
-      if (error || !data) {
-        console.error(error);
-        return;
-      }
+    if (error || !data) {
+      console.error(error);
+      return;
+    }
 
-      console.log("Slug recibido:", slug);
-      console.log("Error:", error);
-      console.log("Data:", data);
+  console.log("Slug recibido:", slug);
+  console.log("Error:", error);
+  console.log("Data:", data);
 
-      // const found = data.find((item: Article) => item.slug === slug);
+  
 
-      setArticle(data);
-      
-      const { data: popularData, error: popularError } = await supabase
-    .from("news")
-    .select("*")
-    .limit(5);
+    // const found = data.find((item: Article) => item.slug === slug);
 
-    if (!popularError) {
+    setArticle(data);
+    
+    const { data: popularData, error: popularError } = await supabase
+  .from("news")
+  .select("*")
+  .limit(5);
+
+  if (!popularError) {
+    setPopular(popularData ?? []);
+  }
+
   setPopular(popularData ?? []);
 }
 
-    setPopular(popularData ?? []);
-    }
+  if (slug) fetchData();
+}, [slug]);
 
-    if (slug) fetchData();
-  }, [slug]);
+if (!article) return <p>Cargando artículo...</p>;
 
-  if (!article) return <p>Cargando artículo...</p>;
+const shareUrl = encodeURIComponent(
+  `https://arycobr.com/blog/${article.slug}`
+);
 
-  const shareUrl = encodeURIComponent(
-            `https://arycobr.com/blog/${article.slug}`
-            );
+const formatDate = (created_at: string) => {
+  return new Date(created_at).toLocaleDateString("es-MX", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+};
+
+const today = new Date().toLocaleDateString("es-MX", {
+  weekday: "long",
+  month: "long",
+  day: "numeric",
+  year: "numeric",
+});
 
 //   const shareInstagram = async () => {
 //   const url = `https://arycobr.com/blog/${article.slug}`;
@@ -105,7 +123,7 @@ export default function ArticleClient({ slug }: { slug: string }) {
       <div className="containerNews">
         <div className="row1">
           <div className="dateNews">
-            <h6 id="fecha"></h6>
+            <h6>{today}</h6>
           </div>
           <div className="NewsTitle">
             <h1>NOTICIAS Y TENDENCIAS</h1>
@@ -126,6 +144,7 @@ export default function ArticleClient({ slug }: { slug: string }) {
 
         <div className="ArticuloRow3">
           <div className="articleContainer">
+            
             
 
             <article className={Styles.articleMain}>
@@ -161,9 +180,9 @@ export default function ArticleClient({ slug }: { slug: string }) {
               <h1 className="articleTitle">{article.title}</h1>
 
               <div className="articleMeta">
-                <span>{article.author}</span>
+                <span>Por {article.author}</span>
                 <br />
-                <span>{article.date}</span>
+                <span>{formatDate(article.created_at)}</span>
               </div>
 
               {article.newsImage?.[0] && (
@@ -188,11 +207,24 @@ export default function ArticleClient({ slug }: { slug: string }) {
                 <Link
                   key={item.id}
                   href={`/blog/${item.slug}`}
-                  className="newsLink"
+                  className={Styles.newsLink}
                 >
-                  <div className="newsItem">
-                    <span>{item.category}</span>
-                    <h6>{item.title}</h6>
+                  <Image
+                    src={item.newsImage?.[0] || "/default-image.jpg"}
+                    alt={item.title}
+                    width={100}
+                    height={75}
+                    className={Styles.newsImage}
+                  />
+
+                  <div className={Styles.newsText}>
+                    <span className={Styles.category}>
+                      {item.category}
+                    </span>
+
+                    <span className={Styles.title}>
+                      {item.title}
+                    </span>
                   </div>
                 </Link>
               ))}
@@ -211,9 +243,11 @@ export default function ArticleClient({ slug }: { slug: string }) {
              Ver casas disponibles
            </Link>
          </div>
+         <br />
 
         </div>
       </div>
+      <Footer />
     </>
   );
 }

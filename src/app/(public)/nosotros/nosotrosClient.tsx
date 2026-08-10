@@ -1,7 +1,8 @@
-
 import Script from "next/script";
 import Image from "next/image";
 import styles from "./nosotros.module.css";
+import Footer from "@/components/Footer/Footer";
+
 
 export default function NosotrosPage() {
   return (
@@ -104,30 +105,7 @@ export default function NosotrosPage() {
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className={styles.footer}>
-        <div className={styles.footerContent}>
-          <span>© 2025 Aryco, Inc</span>
-
-          <span className={styles.footerCenter}>
-            Designed by: Astruck Labs
-          </span>
-
-          <div className={styles.socialIcons}>
-            <a href="https://www.instagram.com/arellanoycia/" target="_blank" rel="noopener noreferrer">
-              <i className="bi bi-instagram"></i>
-            </a>
-
-            <a
-              href="https://www.facebook.com/profile.php?id=100095554081624"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <i className="bi bi-facebook"></i>
-            </a>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </>
   );
 }

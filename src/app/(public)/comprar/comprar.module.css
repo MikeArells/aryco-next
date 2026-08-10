@@ -44,14 +44,98 @@
     background:transparent;
 }
 
-    /* FILTERS */
+
+/* AQUI ESTÁN LOS ESTILOS PARA LA TARJETA DE PROPIEDAD */
+.propertyCard {
+  display: block;
+  width: 100%;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  text-decoration: none;
+  color: #222;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.propertyCard:hover {
+  color: #222;
+  text-decoration: none;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.16);
+}
+
+
+/* IMAGEN */
+
+.propertyImage {
+  position: relative;
+  width: 100%;
+  height: 225px;
+  overflow: hidden;
+}
+
+.propertyImage img {
+  object-fit: cover;
+}
+
+
+/* CONTENIDO */
+
+.propertyBody {
+  padding: 20px;
+}
+
+
+/* PRECIO + ESTATUS */
+
+.priceRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.price {
+  font-size: 21px;
+  font-weight: 700;
+  color: #222;
+}
+
+.status {
+  background-color: #168c57;
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 15px;
+  border-radius: 7px;
+  white-space: nowrap;
+}
+
+
+/* RECÁMARAS / BAÑOS */
+
+.details {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+
+/* UBICACIÓN */
+
+.location {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+}
 
 @media(max-width:992px){
 
     .search-bar{
-
         grid-template-columns:1fr;
-
     }
 
 }

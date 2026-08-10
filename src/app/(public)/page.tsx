@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./home.module.css";
+import Footer from "@/components/Footer/Footer";
 
 export default function Home() {
   return (
@@ -83,10 +84,8 @@ export default function Home() {
 
       </div>
 
-      {/* FOOTER */}
-      <footer className="text-center py-4">
-        <p>© 2025 Aryco</p>
-      </footer>
+      <br />
+      <Footer />
     </>
   );
 }

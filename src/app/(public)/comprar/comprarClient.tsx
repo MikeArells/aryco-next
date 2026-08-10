@@ -90,7 +90,7 @@ export default function ComprarPage() {
         `}
       </Script>
 
-      {/* NAV */}
+      {/* aqui iba el NAV */}
       
 
       {/* FILTROS */}
@@ -130,9 +130,6 @@ export default function ComprarPage() {
 
       </div>
     </section>
-        
-        {/* </div> */}
-      {/* </section> */}
 
       {/* Scripts externos */}
       <Script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" />

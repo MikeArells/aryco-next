@@ -1,0 +1,40 @@
+.footer {
+  background: #2f6b1f;
+  padding: 25px 40px;
+  color: white;
+}
+
+.footerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footerCenter {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.socialIcons {
+  display: flex;
+  gap: 20px;
+}
+
+.socialIcons a {
+  color: white;
+  font-size: 20px;
+  transition: 0.2s ease;
+}
+
+.socialIcons a:hover {
+  opacity: 0.7;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .footerContent {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+}

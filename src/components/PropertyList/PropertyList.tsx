@@ -21,6 +21,7 @@ interface PropertyListProps {
 export default function PropertyList({
   propiedades,
 }: PropertyListProps) {
+  
   return (
     <div className={styles.listWrapper}>
 
@@ -59,16 +60,29 @@ export default function PropertyList({
                   className="card-img-top"
                 />
 
-                <div className="card-body">
+                  <div className="card-body">
 
-                  <h5>{propiedad.titulo}</h5>
+                    <div className={styles.priceRow}>
+                      <span className={styles.price}>
+                        $
+                        {Number(propiedad.precio).toLocaleString("es-MX")}
+                      </span>
 
-                  <p>
-                    $
-                    {Number(propiedad.precio).toLocaleString("es-MX")}
-                  </p>
+                      <span className={styles.status}>
+                        {propiedad.transaccion}
+                      </span>
+                    </div>
+
+                    <div className={styles.details}>
+                      {propiedad.recamaras} recamaras · {propiedad.banos} baño
+                    </div>
+
+                    <div className={styles.location}>
+                      📍 {propiedad.subtitulo}
+                    </div>
 
                   </div>
+
                 </div>
               </Link>
             </div>

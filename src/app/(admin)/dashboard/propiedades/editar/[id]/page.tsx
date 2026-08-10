@@ -1,5 +1,4 @@
 import Sidebar from "@/components/Admin/Sidebar/Sidebar";
-// import PropertyForm from "@/components/Admin/PropertyForm/PropertyForm";
 import EditPropertyForm from "@/components/Admin/EditPropertyForm/EditPropertyForm";
 import { getProperty } from "@/services/propertyService";
 
@@ -21,7 +20,6 @@ export default async function EditPropertyPage({
       <Sidebar />
 
       <main style={{ flex: 1, padding: "40px" }}>
-        {/* <PropertyForm property={property} /> */}
         <EditPropertyForm property={property} />
       </main>
     </div>

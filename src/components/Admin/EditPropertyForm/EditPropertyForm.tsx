@@ -189,6 +189,8 @@ const handleServiceChange = (service: string) => {
               <option value="">Selecciona</option>
               <option value="EN VENTA">En venta</option>
               <option value="EN RENTA">En renta</option>
+              <option value="VENDIDO">Vendido</option>
+              <option value="RENTADO">Rentado</option>
             </select>
           </div>
 

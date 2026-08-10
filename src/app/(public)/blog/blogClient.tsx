@@ -1,4 +1,3 @@
-
 "use client";
 
 import Script from "next/script";
@@ -24,21 +23,28 @@ export default function BlogPage() {
 const [news, setNews] = useState<News[]>([]);
 const featured = news[0]; // Assuming the first article is the featured one
 
-  useEffect(() => {
-  async function fetchNews() {
-    const { data, error } = await supabase
-      .from("news")
-      .select("*");
+const today = new Date().toLocaleDateString("es-MX", {
+  weekday: "long",
+  month: "long",
+  day: "numeric",
+  year: "numeric",
+});
 
-    if (error) {
-      console.log(error);
-      return;
-    }
+useEffect(() => {
+async function fetchNews() {
+  const { data, error } = await supabase
+    .from("news")
+    .select("*");
 
-    if (data) {
-      setNews(data);
-    }
+  if (error) {
+    console.log(error);
+    return;
   }
+
+  if (data) {
+    setNews(data);
+  }
+}
 
   fetchNews();
 }, []);
@@ -66,14 +72,14 @@ const featured = news[0]; // Assuming the first article is the featured one
         ></iframe>
       </noscript>
 
-      {/* NAV */}
+      {/* aqui iba NAV */}
      
       {/* CONTENIDO */}
       <div className="containerNews">
 
         <div className="row1">
           <div className="dateNews">
-            <h6 id="fecha"></h6>
+            <h6>{today}</h6>
           </div>
           <div className="NewsTitle">
             <h1>NOTICIAS Y TENDENCIAS</h1>
