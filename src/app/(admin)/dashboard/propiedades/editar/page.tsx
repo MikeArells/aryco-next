@@ -6,10 +6,16 @@ export default async function EditPropertiesPage() {
   const properties = await getProperties();
 
   return (
-    <div style={{ display: "flex" }}>
+    <div style={{ display: "flex", minHeight: "100vh"  }}>
       <Sidebar />
 
-      <main style={{ flex: 1, padding: "40px" }}>
+      <main 
+        style={{ 
+          flex: 1, 
+          padding: "40px", 
+          background: "#f5f6f8", 
+        }}
+      >
         <h2>Propiedades registradas</h2>
 
         <p
@@ -19,7 +25,8 @@ export default async function EditPropertiesPage() {
             color: "#555",
           }}
         >
-          Total de propiedades: <strong>{properties.length}</strong>
+          Total de propiedades: 
+          <strong>{properties.length}</strong>
         </p>
 
         <PropertyList properties={properties} />

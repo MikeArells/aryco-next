@@ -1,5 +1,6 @@
 import Script from "next/script";
 import { getProperty } from "@/lib/properties";
+import Footer from "@/components/Footer/Footer";
 
 export default async function PropertyPage({
   params,
@@ -42,6 +43,7 @@ export default async function PropertyPage({
       <p>{property.descripcion}</p>
     </main>
 
+      <Footer />
     </>
   );
 }

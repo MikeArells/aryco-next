@@ -4,6 +4,7 @@ import { getProperty } from '@/lib/properties';
 import TiktokEmbed from "@/components/TiktokEmbed/TiktokEmbed";
 import PropertyGallery from "@/components/PropertyGallery/PropertyGallery";
 import { FaBed, FaBath, FaCar } from "react-icons/fa";
+import Footer from "@/components/Footer/Footer";
 
 import type { Metadata } from "next";
 // import { getProperty } from "@/lib/properties";
@@ -157,6 +158,8 @@ export default async function PropertyPage({
         </section>
 
       </main>
+
+      <Footer />
     </>
   );
 }

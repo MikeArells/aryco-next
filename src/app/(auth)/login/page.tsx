@@ -57,7 +57,7 @@ export default function LoginPage() {
             <h1>Iniciar sesión</h1>
 
             <p>
-              Bienvenido a la sección de administración, por el momento solo los administradores pueden acceder a esta sección. Si no eres administrador, por favor regresa al inicio.
+              Bienvenido a la sección de administración, por el momento solo los administradores pueden acceder a esta sección. 
             </p>
 
             <form onSubmit={handleSubmit} className={styles.form}>

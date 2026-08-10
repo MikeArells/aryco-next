@@ -1,8 +1,6 @@
-
 "use client";
 
 import Script from "next/script";
-// import { supabase } from "@/lib/supabase";
 import type { Propiedad } from "@/types/propiedad";
 import styles from "./rentar.module.css";
 import { useEffect, useState, useMemo} from "react";
@@ -13,42 +11,39 @@ import { createClient } from "@/lib/supabase/client";
 
 const supabase = createClient();
 
-
-
-
 export default function RentarPage() {
 
-  const [propiedades, setPropiedades] = useState<Propiedad[]>([]);
-  const [error, setError] = useState<string | null>(null);
+const [propiedades, setPropiedades] = useState<Propiedad[]>([]);
+const [error, setError] = useState<string | null>(null);
 
   // Estados de los filtros
-  const [ciudad, setCiudad] = useState("");
-  const [precio, setPrecio] = useState("");
-  const [recamaras, setRecamaras] = useState("");
-  const [tipoPropiedad, setTipoPropiedad] = useState("");
+const [ciudad, setCiudad] = useState("");
+const [precio, setPrecio] = useState("");
+const [recamaras, setRecamaras] = useState("");
+const [tipoPropiedad, setTipoPropiedad] = useState("");
 
-  useEffect(() => {
+useEffect(() => {
 
-    async function cargarPropiedades() {
+  async function cargarPropiedades() {
 
-      const { data, error } = await supabase
-            .from("propiedades")
-            .select("*")
-            .eq("transaccion", "EN RENTA");
+    const { data, error } = await supabase
+          .from("propiedades")
+          .select("*")
+          .eq("transaccion", "EN RENTA");
 
-          if (error) {
-            console.error(error);
-            setError(error.message);
-            return;
-          }
-
-          setPropiedades(data);
-          console.log(data); // Para comprobar que llegan
-
+        if (error) {
+          console.error(error);
+          setError(error.message);
+          return;
         }
 
-    cargarPropiedades();
-  }, []);
+        setPropiedades(data);
+        console.log(data); // Para comprobar que llegan
+
+      }
+
+  cargarPropiedades();
+}, []);
 
   const propiedadesFiltradas = useMemo(() => {
   let filtradas = propiedades;
@@ -95,19 +90,18 @@ export default function RentarPage() {
       </Script>
 
       {/* NAV */}
-      
 
-         {/* FILTROS */}
-   <Filters
-      ciudad={ciudad}
-      setCiudad={setCiudad}
-      precio={precio}
-      setPrecio={setPrecio}
-      recamaras={recamaras}
-      setRecamaras={setRecamaras}
-      tipoPropiedad={tipoPropiedad}
-      setTipoPropiedad={setTipoPropiedad}
-    />
+  {/* FILTROS */}
+<Filters
+  ciudad={ciudad}
+  setCiudad={setCiudad}
+  precio={precio}
+  setPrecio={setPrecio}
+  recamaras={recamaras}
+  setRecamaras={setRecamaras}
+  tipoPropiedad={tipoPropiedad}
+  setTipoPropiedad={setTipoPropiedad}
+/>
 
     {/* MAPA + LISTA */}
 
@@ -134,9 +128,6 @@ export default function RentarPage() {
 
       </div>
     </section>
-        
-        {/* </div> */}
-      {/* </section> */}
 
       {/* Scripts externos */}
       <Script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" />
