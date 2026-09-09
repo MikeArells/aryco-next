@@ -33,6 +33,7 @@ export default function EditPropertyForm({
   recamaras: property.recamaras,
   banos: property.banos,
   carros: property.carros,
+  agente: property.agente ?? "",
   images: [],
 });
 
@@ -158,7 +159,7 @@ const handleServiceChange = (service: string) => {
           {/* Subtítulo */}
           <div className={styles.inputGroup}>
             <label htmlFor="subtitulo" className={styles.label}>
-              Subtítulo
+              Ubicación
             </label>
 
             <input
@@ -411,6 +412,27 @@ const handleServiceChange = (service: string) => {
             value={formData.carros ?? ""}
             onChange={handleChange}
           />
+        </div>
+
+        {/* Agente */}
+        <div className={styles.inputGroup}>
+          <label htmlFor="agente" className={styles.label}>
+            Agente encargado
+          </label>
+
+          <select
+            className={styles.select}
+            id="agente"
+            name="agente"
+            value={formData.agente}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Selecciona</option>
+            <option value="Miguel Baez">Miguel Baez</option>
+            <option value="Miguel Arellano">Miguel Arellano</option>
+            <option value="Paulina Martinez">Paulina Martinez</option>
+          </select>
         </div>
 
         <PropertyImagesEditor

@@ -1,4 +1,3 @@
-// import { supabase } from "@/lib/supabase";
 import { PropertyFormData } from "@/types/propertyForm";
 import { createClient } from "@/lib/supabase/client";
 
@@ -50,12 +49,13 @@ export async function createProperty(
   return payload;
 }
 
-
 export async function getProperties() {
   const { data, error } = await supabase
-    .from("propiedades")
-    .select("*")
-    .order("created_at", { ascending: false });
+  .from("propiedades")
+  .select("*");
+
+console.log("PROPIEDADES OBTENIDAS:", data);
+console.log("TOTAL:", data?.length);
 
   if (error) {
     throw error;
@@ -166,6 +166,7 @@ export async function updateProperty(
       recamaras: formData.recamaras,
       banos: formData.banos,
       carros: formData.carros,
+      agente: formData.agente,
       images: finalImages,
     })
     .eq("id", id);

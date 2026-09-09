@@ -26,5 +26,7 @@ export interface Propiedad {
   banos: number | null;
   carros: number | null;
 
+  agente: string | null;
+
   images: string[];
 }

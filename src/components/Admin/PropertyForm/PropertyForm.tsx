@@ -23,6 +23,7 @@ export default function PropertyForm() {
     recamaras: null,
     banos: null,
     carros: null,
+    agente: "",
     images: [],
   });
 
@@ -33,7 +34,6 @@ export default function PropertyForm() {
     "recamaras",
     "banos",
     "carros",
-
   ];
 
 
@@ -156,7 +156,7 @@ const handleServiceChange = (service: string) => {
           {/* Subtítulo */}
           <div className={styles.inputGroup}>
             <label htmlFor="subtitulo" className={styles.label}>
-              Subtítulo
+              Ubicación
             </label>
 
             <input
@@ -232,6 +232,7 @@ const handleServiceChange = (service: string) => {
           </div>
         </div>
 
+        {/* Terreno */}
         <div className={styles.inputGroup}>
             <label htmlFor="terreno" className={styles.label}>
                 Terreno (m²)
@@ -248,6 +249,7 @@ const handleServiceChange = (service: string) => {
             />
         </div>
 
+        {/* Construccion */}
         <div className={styles.inputGroup}>
             <label htmlFor="construccion" className={styles.label}>
                 Construcción (m²)
@@ -264,6 +266,7 @@ const handleServiceChange = (service: string) => {
             />
         </div>
 
+        {/* Ocupacion */}
         <div className={styles.inputGroup}>
             <label htmlFor="ocupacion" className={styles.label}>
                 Ocupación
@@ -278,7 +281,8 @@ const handleServiceChange = (service: string) => {
                 onChange={handleChange}
             />
         </div>
-
+    
+        {/* Forma de pago */}
         <div className={styles.inputGroup}>
             <label htmlFor="pago" className={styles.label}>
                 Forma de pago
@@ -408,6 +412,27 @@ const handleServiceChange = (service: string) => {
             onChange={handleChange}
           />
         </div>
+
+        {/* Agente */}
+          <div className={styles.inputGroup}>
+            <label htmlFor="agente" className={styles.label}>
+              Agente encargado
+            </label>
+
+            <select
+              className={styles.select}
+              id="agente"
+              name="agente"
+              value={formData.agente}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Selecciona</option>
+              <option value="Miguel Baez">Miguel Baez</option>
+              <option value="Miguel Arellano">Miguel Arellano</option>
+              <option value="Paulina Martinez">Paulina Martinez</option>
+            </select>
+          </div>
 
         <div className={styles.inputGroupFull}>
           <label htmlFor="images" className={styles.label}>

@@ -27,5 +27,7 @@ export interface PropertyFormData {
 
   carros: number | null;
 
+  agente: string;
+
   images: File[];
 }
