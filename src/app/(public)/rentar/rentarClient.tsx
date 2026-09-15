@@ -112,7 +112,7 @@ useEffect(() => {
     )}
 
     <section className={styles.propertiesSection}>
-      <div className="row h-100 g-0">
+      <div className={`row h-100 g-0 ${styles.propertiesRow}`}>
 
         {/* MAPA */}
         <div className={`col-12 col-lg-6 h-100 ${styles.mapCol}`}> 
@@ -122,7 +122,19 @@ useEffect(() => {
         </div>
 
         {/* LISTA */}
-        <div className="col-12 col-lg-6 h-100">
+        <div className={`col-12 col-lg-6 h-100 ${styles.listWrapper}`}>
+
+          <div className={styles.resultsHeader}>
+            <h3>Propiedades en renta</h3>
+
+            <span>
+              {propiedadesFiltradas.length}{" "}
+              {propiedadesFiltradas.length === 1
+                ? "propiedad encontrada"
+                : "propiedades encontradas"}
+            </span>
+          </div>
+
           <PropertyList propiedades={propiedadesFiltradas} />
         </div>
 

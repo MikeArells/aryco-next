@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
+
 import styles from "./Sidebar.module.css";
-// import { supabase } from "@/lib/supabase";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
@@ -36,6 +37,8 @@ export default function Sidebar() {
   const pathname = usePathname();
   const router = useRouter();
 
+  const [collapsed, setCollapsed] = useState(false);
+
   const handleLogout = async () => {
   const { error } = await supabase.auth.signOut();
 
@@ -50,29 +53,53 @@ export default function Sidebar() {
 };
 
   return (
-    <aside className={styles.sidebar}>
-      <h2 className={styles.title}>Panel</h2>
+    <aside
+      className={`${styles.sidebar} ${
+        collapsed ? styles.collapsed : ""
+      }`}
+    >
 
-      <nav className={styles.menu}>
-        {tabs.map((tab) => (
-          <Link
-            key={tab.href}
-            href={tab.href}
-            className={`${styles.button} ${
-              pathname === tab.href ? styles.active : ""
-            }`}
-          >
-            {tab.label}
-          </Link>
-        ))}
-      </nav>
-
-      <button className={`${styles.button} ${styles.logout}`}
-      onClick={handleLogout}
+      {/* BOTÓN COLAPSAR / DESPLEGAR */}
+      <button
+        className={styles.toggleButton}
+        onClick={() => setCollapsed(!collapsed)}
+        aria-label={
+          collapsed
+            ? "Desplegar menú"
+            : "Colapsar menú"
+        }
       >
-        Cerrar sesión
+        {collapsed ? "›" : "‹"}
       </button>
-      
+
+      {/* CONTENIDO DEL SIDEBAR */}
+      {!collapsed && (
+        <>
+          <h2 className={styles.title}>Panel</h2>
+
+          <nav className={styles.menu}>
+            {tabs.map((tab) => (
+              <Link
+                key={tab.href}
+                href={tab.href}
+                className={`${styles.button} ${
+                  pathname === tab.href ? styles.active : ""
+                }`}
+              >
+                {tab.label}
+              </Link>
+            ))}
+          </nav>
+
+          <button
+            className={`${styles.button} ${styles.logout}`}
+            onClick={handleLogout}
+          >
+            Cerrar sesión
+          </button>
+        </>
+      )}
+
     </aside>
   );
 }

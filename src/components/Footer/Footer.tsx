@@ -11,7 +11,8 @@ export default function Footer() {
         </span>
 
             <div className={styles.socialIcons}>
-                <a href="https://www.instagram.com/arellanoycia/" target="_blank" rel="noopener noreferrer">
+                <a 
+                href="https://www.instagram.com/arellanoycia/" target="_blank" rel="noopener noreferrer">
                 <i className="bi bi-instagram"></i>
                 </a>
 
@@ -21,6 +22,14 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 >
                 <i className="bi bi-facebook"></i>
+                </a>
+
+                <a
+                href="https://www.tiktok.com/@arycobr?is_from_webapp=1&sender_device=pc&web_id=7210591556780425222"
+                target="_blank"
+                rel="noopener noreferrer"
+                >
+                <i className="bi bi-tiktok"></i>
                 </a>
             </div>
         </div>

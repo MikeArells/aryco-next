@@ -25,9 +25,9 @@ export default function PropertyList({
   return (
     <div className={styles.listWrapper}>
 
-      <h3 className="title-prop">
+      {/* <h3 className="title-prop">
         Propiedades en venta en Aguascalientes.
-      </h3>
+      </h3> */}
 
       <div className={styles.propertyList}>
 

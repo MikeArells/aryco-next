@@ -1,6 +1,7 @@
 "use client";
 
 import Script from "next/script";
+import { useSearchParams } from "next/navigation";
 import type { Propiedad } from "@/types/propiedad";
 import styles from "./comprar.module.css";
 import { useEffect, useState, useMemo} from "react";
@@ -18,10 +19,23 @@ export default function ComprarPage() {
   const [error, setError] = useState<string | null>(null);
 
   // Estados de los filtros
-  const [ciudad, setCiudad] = useState("");
-  const [precio, setPrecio] = useState("");
-  const [recamaras, setRecamaras] = useState("");
-  const [tipoPropiedad, setTipoPropiedad] = useState("");
+  const searchParams = useSearchParams();
+
+  const [ciudad, setCiudad] = useState(
+    searchParams.get("ciudad") || ""
+  );
+
+  const [precio, setPrecio] = useState(
+    searchParams.get("precio") || ""
+  );
+
+  const [recamaras, setRecamaras] = useState(
+    searchParams.get("recamaras") || ""
+  );
+
+  const [tipoPropiedad, setTipoPropiedad] = useState(
+    searchParams.get("tipo") || ""
+  );
 
   useEffect(() => {
 
@@ -114,7 +128,7 @@ export default function ComprarPage() {
     )}
 
     <section className={styles.propertiesSection}>
-      <div className="row h-100 g-0">
+      <div className={`row h-100 g-0 ${styles.propertiesRow}`}>
 
         {/* MAPA */}
         <div className={`col-12 col-lg-6 h-100 ${styles.mapCol}`}> 
@@ -124,8 +138,22 @@ export default function ComprarPage() {
         </div>
 
         {/* LISTA */}
-        <div className="col-12 col-lg-6 h-100">
+        <div className={`col-12 col-lg-6 h-100 ${styles.listWrapper}`}>
+
+          <div className={styles.resultsHeader}>
+            <h3>Propiedades en venta</h3>
+
+            <span>
+              {propiedadesFiltradas.length}{" "}
+              {propiedadesFiltradas.length === 1
+                ? "propiedad encontrada"
+                : "propiedades encontradas"}
+            </span>
+          </div>
+
           <PropertyList propiedades={propiedadesFiltradas} />
+
+          
         </div>
 
       </div>

@@ -1,55 +1,198 @@
-.propertiesSection{
-    height: calc(100vh - 170px); /* Ajusta según la altura de tu navbar */
+.propertiesSection {
+    height: calc(100vh - 181px);
+    overflow: hidden;
 }
 
-.mapCol{
-    height:100%;
-}
-
-.listWrapper{
-    display:flex;
-    flex-direction:column;
-    height:100%;
-}
-
-.mapWrapper{
+.propertiesRow {
+    min-height: 0;
     height: 100%;
 }
 
-.map{
+.mapCol {
+    height: 100%;
+    overflow: hidden;
+}
+
+.listWrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.mapWrapper {
+    height: 100%;
+    overflow: hidden;
+}
+
+.map {
     width: 100%;
     height: 100%;
     border-radius: 5px;
 }
 
-.propertyList{
-    flex:1;
-    overflow-y:auto;
-    overflow-x:hidden;
-    padding-right:10px;
+/* =========================
+   LISTA DE PROPIEDADES
+   ========================= */
+
+.propertyList {
+    flex: 1  1 auto;
+    min-height: 0;
+    height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 5px 10px 20px 2px;
+    box-sizing: border-box;
 }
 
-/* Scroll bonito */
+/* Scroll */
 
-/* .propertyList::-webkit-scrollbar{
-    width:8px;
-} */
-
-.propertyList::-webkit-scrollbar-thumb{
-    background:#bdbdbd;
-    border-radius:20px;
+.propertyList::-webkit-scrollbar {
+    width: 8px;
 }
 
-.propertyList::-webkit-scrollbar-track{
-    background:transparent;
+.propertyList::-webkit-scrollbar-thumb {
+    background: #bdbdbd;
+    border-radius: 20px;
 }
 
-@media(max-width:992px){
+.propertyList::-webkit-scrollbar-track {
+    background: transparent;
+}
 
-    .search-bar{
 
-        grid-template-columns:1fr;
+/* =========================
+   TARJETA DE PROPIEDAD
+   ========================= */
 
+.propertyCard {
+    display: block;
+    width: 100%;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    text-decoration: none;
+    color: #222;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.propertyCard:hover {
+    color: #222;
+    text-decoration: none;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.16);
+}
+
+
+/* =========================
+   IMAGEN
+   ========================= */
+
+.propertyImage {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+}
+
+.propertyImage img {
+    object-fit: cover;
+}
+
+
+/* =========================
+   CONTENIDO
+   ========================= */
+
+.propertyBody {
+    padding: 16px;
+}
+
+
+/* =========================
+   PRECIO + ESTATUS
+   ========================= */
+
+.priceRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 8px;
+}
+
+.price {
+    font-size: 21px;
+    font-weight: 700;
+    color: #222;
+}
+
+.status {
+    background-color: #168c57;
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 6px 15px;
+    border-radius: 7px;
+    white-space: nowrap;
+}
+
+
+/* =========================
+   RECÁMARAS / BAÑOS
+   ========================= */
+
+.details {
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+
+/* =========================
+   UBICACIÓN
+   ========================= */
+
+.location {
+    font-size: 16px;
+    line-height: 1.4;
+    color: #333;
+}
+
+/* =========================
+   ENCABEZADO
+   ========================= */
+
+.resultsHeader {
+    flex-shrink: 0;
+    padding: 8px 15px 4px;
+    background: #fff;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.resultsHeader h3 {
+    margin: 0 0 0px;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.resultsHeader span {
+    font-size: 15px;
+    color: #666;
+}
+
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 992px) {
+
+    .search-bar {
+        grid-template-columns: 1fr;
     }
 
 }
