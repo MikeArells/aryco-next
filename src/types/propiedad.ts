@@ -30,3 +30,17 @@ export interface Propiedad {
 
   images: string[];
 }
+
+export type PropiedadListado = Pick<
+  Propiedad,
+  | "id"
+  | "titulo"
+  | "subtitulo"
+  | "transaccion"
+  | "precio"
+  | "tipoPropiedad"
+  | "recamaras"
+  | "banos"
+  | "maps_url"
+  | "images"
+>;

@@ -1,7 +1,8 @@
 "use client";
 
 import Script from "next/script";
-import type { Propiedad } from "@/types/propiedad";
+import { useSearchParams } from "next/navigation";
+import type { PropiedadListado } from "@/types/propiedad";
 import styles from "./rentar.module.css";
 import { useEffect, useState, useMemo} from "react";
 import PropertyMap from "@/components/PropertyMap";
@@ -13,14 +14,28 @@ const supabase = createClient();
 
 export default function RentarPage() {
 
-const [propiedades, setPropiedades] = useState<Propiedad[]>([]);
+const [propiedades, setPropiedades] = useState<PropiedadListado[]>([]);
 const [error, setError] = useState<string | null>(null);
+const [mapaAbierto, setMapaAbierto] = useState(false);
 
   // Estados de los filtros
-const [ciudad, setCiudad] = useState("");
-const [precio, setPrecio] = useState("");
-const [recamaras, setRecamaras] = useState("");
-const [tipoPropiedad, setTipoPropiedad] = useState("");
+  const searchParams = useSearchParams();
+
+  const [ciudad, setCiudad] = useState(
+    searchParams.get("ciudad") || ""
+  );
+
+  const [precio, setPrecio] = useState(
+    searchParams.get("precio") || ""
+  );
+
+  const [recamaras, setRecamaras] = useState(
+    searchParams.get("recamaras") || ""
+  );
+
+  const [tipoPropiedad, setTipoPropiedad] = useState(
+    searchParams.get("tipo") || ""
+  );
 
 useEffect(() => {
 
@@ -28,7 +43,18 @@ useEffect(() => {
 
     const { data, error } = await supabase
           .from("propiedades")
-          .select("*")
+          .select(`
+              id,
+              titulo,
+              subtitulo,
+              transaccion,
+              precio,
+              tipoPropiedad,
+              recamaras,
+              banos,
+              maps_url,
+              images
+            `)
           .eq("transaccion", "EN RENTA");
 
         if (error) {
@@ -103,6 +129,12 @@ useEffect(() => {
   setTipoPropiedad={setTipoPropiedad}
 />
 
+<div className={styles.mobileMapButton}>
+  <button onClick={() => setMapaAbierto(!mapaAbierto)}>
+    {mapaAbierto ? "✕ Ocultar mapa" : "🗺️ Ver mapa"}
+  </button>
+</div>
+
     {/* MAPA + LISTA */}
 
     {error && (
@@ -115,10 +147,17 @@ useEffect(() => {
       <div className={`row h-100 g-0 ${styles.propertiesRow}`}>
 
         {/* MAPA */}
-        <div className={`col-12 col-lg-6 h-100 ${styles.mapCol}`}> 
+        <div className={`col-12 col-lg-6 h-100 ${styles.mapCol} ${
+          mapaAbierto ? styles.mapMobileOpen : ""
+          }`}
+        >
           <div className={styles.mapWrapper}>
-              <PropertyMap propiedades={propiedadesFiltradas} />
+            <PropertyMap 
+            propiedades={propiedadesFiltradas} 
+            mapaAbierto={mapaAbierto} 
+            />
           </div>
+          
         </div>
 
         {/* LISTA */}

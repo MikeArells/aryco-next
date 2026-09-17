@@ -186,6 +186,94 @@
 
 
 /* =========================
+   BOTÓN MAPA EN MÓVIL
+   ========================= */
+
+.mobileMapButton {
+  display: none;
+}
+
+/* .closeMapButton {
+  display: none;
+} */
+
+
+/* =========================
+   VISTA MÓVIL
+   ========================= */
+
+@media (max-width: 991px) {
+
+  .mobileMapButton {
+    display: flex;
+    justify-content: center;
+    padding: 10px 15px;
+    background: white;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .mobileMapButton button {
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    background: #222;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  /* Ocultar mapa normalmente */
+  .mapCol {
+    display: none;
+  }
+
+  /* Mostrar mapa cuando se abre */
+  .mapCol.mapMobileOpen {
+    display: block;
+    width: 100%;
+    height: 400px !important;
+  }
+
+  .mapMobileOpen .mapWrapper {
+    width: 100%;
+    height: 400px;
+    position: relative;
+  }
+
+  .mapMobileOpen :global(#map) {
+    width: 100% !important;
+    height: 400px !important;
+  }
+
+  /* La lista ocupa todo el ancho */
+  .listWrapper {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
+
+  .propertyList {
+    height: auto;
+    overflow: visible;
+    padding-bottom: 20px;
+  }
+
+  /* Seccion en Movil */
+   .propertiesSection {
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
+
+  .propertiesRow {
+    height: auto;
+    min-height: 0;
+  }
+
+}
+
+/* =========================
    RESPONSIVE
    ========================= */
 

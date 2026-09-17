@@ -2,7 +2,7 @@
 
 import Script from "next/script";
 import { useSearchParams } from "next/navigation";
-import type { Propiedad } from "@/types/propiedad";
+import type { PropiedadListado } from "@/types/propiedad";
 import styles from "./comprar.module.css";
 import { useEffect, useState, useMemo} from "react";
 import PropertyMap from "@/components/PropertyMap";
@@ -10,13 +10,15 @@ import PropertyList from "@/components/PropertyList/PropertyList";
 import Filters from "@/components/Filters/Filters";
 import { createClient } from "@/lib/supabase/client";
 
+
 const supabase = createClient();
 
 
 export default function ComprarPage() {
 
-  const [propiedades, setPropiedades] = useState<Propiedad[]>([]);
+  const [propiedades, setPropiedades] = useState<PropiedadListado[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [mapaAbierto, setMapaAbierto] = useState(false);
 
   // Estados de los filtros
   const searchParams = useSearchParams();
@@ -43,7 +45,18 @@ export default function ComprarPage() {
 
       const { data, error } = await supabase
             .from("propiedades")
-            .select("*")
+            .select(`
+              id,
+              titulo,
+              subtitulo,
+              transaccion,
+              precio,
+              tipoPropiedad,
+              recamaras,
+              banos,
+              maps_url,
+              images
+            `)
             .eq("transaccion", "EN VENTA");
 
           if (error) {
@@ -119,6 +132,12 @@ export default function ComprarPage() {
       setTipoPropiedad={setTipoPropiedad}
     />
 
+    <div className={styles.mobileMapButton}>
+      <button onClick={() => setMapaAbierto(!mapaAbierto)}>
+        {mapaAbierto ? "✕ Ocultar mapa" : "🗺️ Ver mapa"}
+      </button>
+    </div>
+
     {/* MAPA + LISTA */}
 
     {error && (
@@ -131,10 +150,18 @@ export default function ComprarPage() {
       <div className={`row h-100 g-0 ${styles.propertiesRow}`}>
 
         {/* MAPA */}
-        <div className={`col-12 col-lg-6 h-100 ${styles.mapCol}`}> 
+        <div
+          className={`col-12 col-lg-6 h-100 ${styles.mapCol} ${
+            mapaAbierto ? styles.mapMobileOpen : ""
+          }`}
+        >
           <div className={styles.mapWrapper}>
-              <PropertyMap propiedades={propiedadesFiltradas} />
+            <PropertyMap 
+            propiedades={propiedadesFiltradas} 
+            mapaAbierto={mapaAbierto} 
+            />
           </div>
+          
         </div>
 
         {/* LISTA */}
@@ -153,7 +180,6 @@ export default function ComprarPage() {
 
           <PropertyList propiedades={propiedadesFiltradas} />
 
-          
         </div>
 
       </div>

@@ -2,7 +2,8 @@
 
 import { useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
-import type { Propiedad } from "@/types/propiedad";
+// import type { Propiedad } from "@/types/propiedad";
+import type { PropiedadListado } from "@/types/propiedad";
 
 function slugify(text: string) {
   return text
@@ -14,12 +15,14 @@ function slugify(text: string) {
 }
 
 interface PropertyMapProps {
-  propiedades: Propiedad[];
+  propiedades: PropiedadListado[];
+  mapaAbierto?: boolean;
 }
 
 //Exportamos las coordenadas
 export default function PropertyMap({
   propiedades,
+  mapaAbierto,
 }: PropertyMapProps) {
 
   const mapRef = useRef<mapboxgl.Map | null>(null);
@@ -59,6 +62,15 @@ export default function PropertyMap({
 
   }, []);
 
+  useEffect(() => {
+  if (!mapRef.current || !mapaAbierto) return;
+
+  // Esperamos a que el contenedor sea visible
+  setTimeout(() => {
+    mapRef.current?.resize();
+  }, 100);
+}, [mapaAbierto]);
+
   // Dibujar marcadores cuando cambien las propiedades
   useEffect(() => {
 
@@ -76,16 +88,41 @@ export default function PropertyMap({
 
       const popup = new mapboxgl.Popup({
         offset: 25,
-      }).setHTML(`
+      });
+
+      popup.on("open", () => {
+        const popupElement = popup.getElement();
+
+        if (!popupElement) return;
+
+        const content = popupElement.querySelector(".map-popup-content");
+
+        if (!content) return;
+
+        content.innerHTML = `
           <div style="width:180px">
-            <a href="/comprar/${propiedad.id}/${slugify(propiedad.titulo)}">              <img
+            <a href="/comprar/${propiedad.id}/${slugify(propiedad.titulo)}">
+              <img
                 src="${propiedad.images[0]}"
+                loading="lazy"
                 style="width:100%;height:100px;object-fit:cover;border-radius:8px;"
+                alt="${propiedad.titulo}"
               />
             </a>
+
             <h6>${propiedad.titulo}</h6>
-            <strong>$${Number(propiedad.precio).toLocaleString("es-MX")}</strong>
+
+            <strong>
+              $${Number(propiedad.precio).toLocaleString("es-MX")}
+            </strong>
           </div>
+        `;
+      });
+
+      popup.setHTML(`
+        <div class="map-popup-content" style="width:180px">
+          <p style="margin:0">Cargando...</p>
+        </div>
       `);
 
       const el = document.createElement("div");

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import RentarClient from "./rentarClient";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Rentar",
@@ -7,6 +8,10 @@ export const metadata: Metadata = {
 };
 
 export default function RentarPage() {
-  return <RentarClient />;
+  return (
+      <Suspense fallback={<div>Cargando propiedades...</div>}>
+        <RentarClient />
+      </Suspense>
+    )
 }
 

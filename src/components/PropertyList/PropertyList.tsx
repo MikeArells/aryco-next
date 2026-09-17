@@ -1,9 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import type { Propiedad } from "@/types/propiedad";
+// import type { PropiedadL } from "@/types/propiedad";
 import styles from "@/app/(public)/comprar/comprar.module.css";
 import Link from "next/link";
+import type { PropiedadListado } from "@/types/propiedad";
 
 function slugify(text: string) {
   return text
@@ -15,7 +16,7 @@ function slugify(text: string) {
 }
 
 interface PropertyListProps {
-  propiedades: Propiedad[];
+  propiedades: PropiedadListado[];
 }
 
 export default function PropertyList({
@@ -57,6 +58,7 @@ export default function PropertyList({
                   alt={propiedad.titulo ?? ""}
                   width={500}
                   height={320}
+                  sizes="(max-width: 575px) 100vw, (max-width: 991px) 50vw, 500px"
                   className="card-img-top"
                 />
 
