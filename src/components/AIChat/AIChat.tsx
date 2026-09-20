@@ -37,7 +37,7 @@ export default function AIChat() {
           aria-label="Abrir asistente de Aryco"
         >
           <Image
-            src="/material/aryco-logo.png"
+            src="/Material/aryco-logo.png"
             alt="Aryco"
             width={58}
             height={58}
@@ -52,7 +52,7 @@ export default function AIChat() {
           <div className={styles.header}>
             <div className={styles.headerInfo}>
               <Image
-                src="/material/aryco-logo.png"
+                src="/Material/aryco-logo.png"
                 alt="Aryco"
                 width={38}
                 height={38}
