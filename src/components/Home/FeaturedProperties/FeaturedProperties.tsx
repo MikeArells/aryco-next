@@ -25,6 +25,7 @@ export default function FeaturedProperties({
 }: FeaturedPropertiesProps) {
 
     const carouselRef = useRef<HTMLDivElement>(null);
+    const featuredProperties = properties.slice(0, 5);
     
     const scrollCarousel = (direction: "left" | "right") => {
     if (!carouselRef.current) return;
@@ -69,7 +70,7 @@ export default function FeaturedProperties({
             className={styles.carousel}
             ref={carouselRef}
             >
-            {properties.map((propiedad) => (
+            {featuredProperties.map((propiedad) => (
               <Link
                 href={`/comprar/${propiedad.id}/${slugify(propiedad.titulo)}`}
                 key={propiedad.id}

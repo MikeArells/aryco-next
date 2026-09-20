@@ -1,5 +1,4 @@
 import HomeClient from "./HomeClient";
-
 import { getProperties } from "@/lib/properties";
 import { getNews } from "@/services/newsService";
 
@@ -13,5 +12,6 @@ export default async function Home() {
       news={news}
       properties={properties}
     />
+    
   );
 }
