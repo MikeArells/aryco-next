@@ -70,12 +70,12 @@ export default function MortgagePartner() {
             </div>
 
             <a
-              href="https://wa.me/524492335540"
+              href="https://preca.creditaria.app/?utm_id=1b6320de-78c8-4792-806b-27fe239796bd"
               target="_blank"
               rel="noopener noreferrer"
               className={styles.button}
             >
-              Conoce más sobre financiamiento
+              Obten una pre-calificación con los mejores créditos.
               <span>→</span>
             </a>
 
