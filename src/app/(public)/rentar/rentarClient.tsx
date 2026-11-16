@@ -25,9 +25,11 @@ const [mapaAbierto, setMapaAbierto] = useState(false);
     searchParams.get("ciudad") || ""
   );
 
-  const [precio, setPrecio] = useState(
-    searchParams.get("precio") || ""
-  );
+  // const [precio, setPrecio] = useState(
+  //   searchParams.get("precio") || ""
+  // );
+  const [precioMin, setPrecioMin] = useState("");
+  const [precioMax, setPrecioMax] = useState("");
 
   const [recamaras, setRecamaras] = useState(
     searchParams.get("recamaras") || ""
@@ -81,9 +83,17 @@ useEffect(() => {
     );
   }
 
-  if (precio) {
+  // FILTRO DE PRECIO MÍNIMO
+  if (precioMin !== "") {
     filtradas = filtradas.filter(
-      (p) => Number(p.precio) <= Number(precio)
+      (p) => Number(p.precio) >= Number(precioMin)
+    );
+  }
+
+  // FILTRO DE PRECIO MÁXIMO
+  if (precioMax !== "") {
+    filtradas = filtradas.filter(
+      (p) => Number(p.precio) <= Number(precioMax)
     );
   }
 
@@ -100,7 +110,7 @@ useEffect(() => {
   }
 
   return filtradas;
-}, [propiedades, ciudad, precio, recamaras, tipoPropiedad]);
+}, [propiedades, ciudad, precioMin, precioMax, recamaras, tipoPropiedad]);
 
   return (
     <>
@@ -121,10 +131,26 @@ useEffect(() => {
 <Filters
   ciudad={ciudad}
   setCiudad={setCiudad}
-  precio={precio}
-  setPrecio={setPrecio}
+
+  // precio={precio}
+  precioMin={precioMin}
+  precioMax={precioMax}
+
+  onApplyPrice={(min, max) => {
+    setPrecioMin(min);
+    setPrecioMax(max);
+  }}
+
+  onClearPrice={() => {
+    setPrecioMin("");
+    setPrecioMax("");
+  }}
+
+  //Recamaras
   recamaras={recamaras}
   setRecamaras={setRecamaras}
+
+  //Tipo de propiedad
   tipoPropiedad={tipoPropiedad}
   setTipoPropiedad={setTipoPropiedad}
 />

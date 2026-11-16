@@ -8,8 +8,19 @@ interface FiltersProps {
   ciudad: string;
   setCiudad: React.Dispatch<React.SetStateAction<string>>;
 
-  precio: string;
-  setPrecio: React.Dispatch<React.SetStateAction<string>>;
+  // precio: string;
+  // setPrecio: React.Dispatch<React.SetStateAction<string>>;
+
+  // precioMin: string;
+  // setPrecioMin: React.Dispatch<React.SetStateAction<string>>;
+
+  // precioMax: string;
+  // setPrecioMax: React.Dispatch<React.SetStateAction<string>>;
+
+  precioMin: string;
+  precioMax: string;
+  onApplyPrice: (min: string, max: string) => void;
+  onClearPrice: () => void;
 
   recamaras: string;
   setRecamaras: React.Dispatch<React.SetStateAction<string>>;
@@ -18,11 +29,23 @@ interface FiltersProps {
   setTipoPropiedad: React.Dispatch<React.SetStateAction<string>>;
 }
 
+const formatPrice = (value: string) => {
+  const numbers = value.replace(/\D/g, "");
+
+  if (!numbers) return "";
+
+  return new Intl.NumberFormat("en-US").format(Number(numbers));
+};
+
 export default function Filters({
   ciudad,
   setCiudad,
-  precio,
-  setPrecio,
+
+  precioMin,
+  precioMax,
+  onApplyPrice,
+  onClearPrice,
+  
   recamaras,
   setRecamaras,
   tipoPropiedad,
@@ -34,11 +57,29 @@ export default function Filters({
   const [banos, setBanos] = useState("");
   const [estacionamientos, setEstacionamientos] = useState("");
 
-  const [precioMin, setPrecioMin] = useState("");
-  const [precioMax, setPrecioMax] = useState("");
+  // const [precioMin, setPrecioMin] = useState("");
+  // const [precioMax, setPrecioMax] = useState("");
 
-  const [superficieMin, setSuperficieMin] = useState("");
-  const [superficieMax, setSuperficieMax] = useState("");
+  // precio max y min
+  const [priceOpen, setPriceOpen] = useState(false);
+
+  const [minPrice, setMinPrice] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
+
+  // Sincronización con ComprarClient
+  // useEffect(() => {
+  //   setMinPrice(precioMin);
+  //   setMaxPrice(precioMax);
+  // }, [precioMin, precioMax]);
+  
+  // const [appliedPrice, setAppliedPrice] = useState({
+  //   min: "",
+  //   max: "",
+  // });
+
+  // superficie min y max
+  const [superficieMin, setSuperficieMin] = useState(precioMin);
+  const [superficieMax, setSuperficieMax] = useState(precioMax);
 
   const [alberca, setAlberca] = useState(false);
   const [jardin, setJardin] = useState(false);
@@ -47,11 +88,16 @@ export default function Filters({
 
   const limpiarFiltros = () => {
     setBanos("");
+
     setEstacionamientos("");
-    setPrecioMin("");
-    setPrecioMax("");
+
+    setPriceOpen(false);
+    setMinPrice("");
+    setMaxPrice("");
+
     setSuperficieMin("");
     setSuperficieMax("");
+
     setAlberca(false);
     setJardin(false);
     setTerraza(false);
@@ -73,16 +119,120 @@ export default function Filters({
             onChange={(e) => setCiudad(e.target.value)}
           />
 
-          <select
-            className={styles.searchSelect}
-            value={precio}
-            onChange={(e) => setPrecio(e.target.value)}
-          >
-            <option value="">Precio</option>
-            <option value="1000000">Hasta $1,000,000</option>
-            <option value="2000000">Hasta $2,000,000</option>
-            <option value="5000000">Hasta $5,000,000</option>
-          </select>
+          {/* Precio max y min */}
+          <div className={styles.priceFilter}>
+            <button
+              type="button"
+              className={`${styles.searchSelect} ${
+                styles.priceButton
+              } ${priceOpen ? styles.priceActive : ""}`}
+              onClick={() => setPriceOpen(!priceOpen)}
+            >
+              <span>Precio</span>
+
+              <svg
+                className={`${styles.priceArrow} ${
+                  priceOpen ? styles.priceArrowOpen : ""
+                }`}
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+            </button>
+
+            {priceOpen && (
+              <div className={styles.priceDropdown}>
+                <h3>Rango de precios</h3>
+
+                <p className={styles.priceDescription}>
+                  Define el presupuesto de tu próxima propiedad.
+                </p>
+
+                <div className={styles.priceInputs}>
+                  <div>
+                    <label>Precio mínimo</label>
+                    <div className={styles.priceInputWrapper}>
+                      <span>$</span>
+                      <input
+                        type="text"
+                        inputMode="numeric"
+                        placeholder="Sin mínimo"
+                        value={minPrice}
+                        onChange={(e) => {
+                          const value = e.target.value.replace(/\D/g, "");
+                          setMinPrice(formatPrice(value));
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label>Precio máximo</label>
+                    <div className={styles.priceInputWrapper}>
+                      <span>$</span>
+                      <input
+                          type="text"
+                          inputMode="numeric"
+                          placeholder="Sin máximo"
+                          value={maxPrice}
+                          onChange={(e) => {
+                            const value = e.target.value.replace(/\D/g, "");
+                            setMaxPrice(formatPrice(value));
+                          }}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div className={styles.priceActions}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setMinPrice("");
+                      setMaxPrice("");
+                      onClearPrice();
+                      setPriceOpen(false);
+                    }}
+                  >
+                    Limpiar
+                  </button>
+
+                  <button
+                    type="button"
+                    className={styles.applyPrice}
+                    onClick={() => {
+                      if (
+                        minPrice !== "" &&
+                        maxPrice !== "" &&
+                        Number(minPrice.replace(/,/g, "")) >
+                        Number(maxPrice.replace(/,/g, ""))
+                      ) {
+                        alert("El precio mínimo no puede ser mayor al máximo.");
+                        return;
+                      }
+
+                      onApplyPrice(
+                        minPrice.replace(/,/g, ""),
+                        maxPrice.replace(/,/g, "")
+                      );
+                      setPriceOpen(false);
+                    }}
+                  >
+                    Aplicar filtros
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+
 
           <select
             className={styles.searchSelect}
@@ -105,6 +255,9 @@ export default function Filters({
             <option value="Casa">Casa</option>
             <option value="Departamento">Departamento</option>
             <option value="Terreno">Terreno</option>
+            <option value="Rancho">Rancho</option>
+            <option value="Local">Local</option>
+            <option value="Bodega">Bodega</option>
           </select>
 
           {/* BOTÓN MÁS FILTROS */}
@@ -128,7 +281,9 @@ export default function Filters({
 
         </div>
 
-        {/* PANEL DE FILTROS ADICIONALES */}
+        {/*==========================
+         PANEL DE FILTROS ADICIONALES
+         ========================= */}
         {showMoreFilters && (
           <div className={styles.moreFiltersPanel}>
 
@@ -192,7 +347,7 @@ export default function Filters({
               </div>
 
               {/* PRECIO MÍNIMO */}
-              <div className={styles.filterGroup}>
+              {/* <div className={styles.filterGroup}>
                 <label htmlFor="precioMin">
                   Precio mínimo
                 </label>
@@ -201,13 +356,13 @@ export default function Filters({
                   id="precioMin"
                   type="number"
                   placeholder="$ Mínimo"
-                  value={precioMin}
-                  onChange={(e) => setPrecioMin(e.target.value)}
+                  value={minPrice}
+                  onChange={(e) => setMinPrice(e.target.value)}
                 />
-              </div>
+              </div> */}
 
               {/* PRECIO MÁXIMO */}
-              <div className={styles.filterGroup}>
+              {/* <div className={styles.filterGroup}>
                 <label htmlFor="precioMax">
                   Precio máximo
                 </label>
@@ -216,10 +371,10 @@ export default function Filters({
                   id="precioMax"
                   type="number"
                   placeholder="$ Máximo"
-                  value={precioMax}
-                  onChange={(e) => setPrecioMax(e.target.value)}
+                  value={maxPrice}
+                  onChange={(e) => setMaxPrice(e.target.value)}
                 />
-              </div>
+              </div> */}
 
               {/* SUPERFICIE MÍNIMA */}
               <div className={styles.filterGroup}>

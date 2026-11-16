@@ -413,7 +413,7 @@ const handleServiceChange = (service: string) => {
           />
         </div>
 
-        {/* Agente */}
+        {/* Agente encargado */}
           <div className={styles.inputGroup}>
             <label htmlFor="agente" className={styles.label}>
               Agente encargado
@@ -434,6 +434,7 @@ const handleServiceChange = (service: string) => {
             </select>
           </div>
 
+        {/* IMAGES */}
         <div className={styles.inputGroupFull}>
           <label htmlFor="images" className={styles.label}>
             Imágenes
@@ -450,6 +451,7 @@ const handleServiceChange = (service: string) => {
           />
         </div>
 
+        {/* SUBMIT BUTTON */}
         <div className={styles.actions}>
           <button
             type="submit"

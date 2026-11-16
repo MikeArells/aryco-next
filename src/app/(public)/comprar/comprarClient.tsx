@@ -13,7 +13,6 @@ import { createClient } from "@/lib/supabase/client";
 
 const supabase = createClient();
 
-
 export default function ComprarPage() {
 
   const [propiedades, setPropiedades] = useState<PropiedadListado[]>([]);
@@ -27,9 +26,11 @@ export default function ComprarPage() {
     searchParams.get("ciudad") || ""
   );
 
-  const [precio, setPrecio] = useState(
-    searchParams.get("precio") || ""
-  );
+  // const [precio, setPrecio] = useState(
+  //   searchParams.get("precio") || ""
+  // );
+  const [precioMin, setPrecioMin] = useState("");
+  const [precioMax, setPrecioMax] = useState("");
 
   const [recamaras, setRecamaras] = useState(
     searchParams.get("recamaras") || ""
@@ -38,6 +39,8 @@ export default function ComprarPage() {
   const [tipoPropiedad, setTipoPropiedad] = useState(
     searchParams.get("tipo") || ""
   );
+
+
 
   useEffect(() => {
 
@@ -83,9 +86,17 @@ export default function ComprarPage() {
     );
   }
 
-  if (precio) {
+  // FILTRO DE PRECIO MÍNIMO
+  if (precioMin !== "") {
     filtradas = filtradas.filter(
-      (p) => Number(p.precio) <= Number(precio)
+      (p) => Number(p.precio) >= Number(precioMin)
+    );
+  }
+
+  // FILTRO DE PRECIO MÁXIMO
+  if (precioMax !== "") {
+    filtradas = filtradas.filter(
+      (p) => Number(p.precio) <= Number(precioMax)
     );
   }
 
@@ -102,7 +113,7 @@ export default function ComprarPage() {
   }
 
   return filtradas;
-}, [propiedades, ciudad, precio, recamaras, tipoPropiedad]);
+}, [propiedades, ciudad, precioMin, precioMax, recamaras, tipoPropiedad]);
 
   return (
     <>
@@ -124,8 +135,22 @@ export default function ComprarPage() {
    <Filters
       ciudad={ciudad}
       setCiudad={setCiudad}
-      precio={precio}
-      setPrecio={setPrecio}
+
+      // precio={precio}
+      // setPrecio={setPrecio}
+      precioMin={precioMin}
+      precioMax={precioMax}
+
+      onApplyPrice={(min, max) => {
+        setPrecioMin(min);
+        setPrecioMax(max);
+      }}
+
+      onClearPrice={() => {
+        setPrecioMin("");
+        setPrecioMax("");
+      }}
+
       recamaras={recamaras}
       setRecamaras={setRecamaras}
       tipoPropiedad={tipoPropiedad}

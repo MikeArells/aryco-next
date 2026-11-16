@@ -202,6 +202,120 @@
   border-color: #333;
 }
 
+.priceFilter {
+  position: relative;
+  min-width: 180px;
+}
+
+.priceFilter > button {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.priceActive {
+  border: 1px solid #2563eb !important;
+  color: #2563eb;
+}
+
+.priceDropdown {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 0;
+  width: 380px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 22px;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.16);
+  z-index: 1000;
+}
+
+.priceDropdown h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 6px;
+  color: #1f2937;
+}
+
+.priceDescription {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 20px;
+}
+
+.priceInputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.priceInputs label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.priceInputWrapper {
+  display: flex;
+  align-items: center;
+  border: 1px solid #d1d5db;
+  border-radius: 9px;
+  padding: 0 10px;
+  height: 48px;
+  gap: 5px;
+}
+
+.priceInputWrapper:focus-within {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+.priceInputWrapper span {
+  color: #6b7280;
+}
+
+.priceInputWrapper input {
+  width: 100%;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  color: #111827;
+}
+
+.priceActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.priceActions button {
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.priceActions .applyPrice {
+  flex: 1;
+  background: #1450d8;
+  color: white;
+  padding: 13px;
+  border-radius: 9px;
+}
+
+.priceActions .applyPrice:hover {
+  background: #0d3eaf;
+}
+
 
 /* =========================
    CARACTERÍSTICAS
@@ -254,7 +368,91 @@
   cursor: pointer;
 }
 
-/* Tablets */
+/*=======================
+       RESPONSIVE 
+ ========================*/
+
+@media (max-width: 480px) {
+  .priceDropdown {
+    width: min(340px, calc(100vw - 32px));
+    left: 0;
+    padding: 18px;
+  }
+
+  .priceInputs {
+    gap: 8px;
+  }
+}
+
+/* Phone views */
+@media (max-width: 768px) {
+
+  .filterSection {
+    width: 100%;
+    max-width: 100%;
+    padding: 10px 0;
+    box-sizing: border-box;
+  }
+
+  .searchBar {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    width: 100%;
+    min-width: 0;
+  }
+
+  /* Buscador de ubicación */
+  .searchInput {
+    grid-column: 1 / -1;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  /* Selectores */
+  .searchSelect {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  /* Filtro de precio */
+  .priceFilter {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .priceFilter > button {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  /* Más filtros */
+  .moreFiltersButton {
+    grid-column: 1 / -1;
+    width: 100%;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+
+  /* Panel desplegable de precio */
+  .priceDropdown {
+    width: min(340px, calc(100vw - 40px));
+    max-width: calc(100vw - 40px);
+    left: 0;
+    box-sizing: border-box;
+  }
+
+  /* Panel de filtros adicionales */
+  .additionalFilters {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+/* Tablets views */
 @media (max-width: 992px) {
 
     .searchBar{
@@ -262,24 +460,3 @@
     }
 
 }
-
-/* Celulares */
-@media (max-width: 768px){
-
-    .filterSection{
-        padding: 12px;
-    }
-
-    .searchBar{
-        grid-template-columns: 1fr;
-        gap: 10px;
-    }
-
-    .searchInput,
-    .searchSelect{
-        height: 44px;
-        font-size: 14px;
-    }
-
-}
-
